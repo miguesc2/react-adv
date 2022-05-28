@@ -32,8 +32,8 @@ export const FormikBasePage = () => {
     
     return errors
   }
-    
-  const { handleSubmit, handleChange, values } = useFormik({
+
+  const { handleSubmit, handleChange, values, errors, touched, handleBlur } = useFormik({
     initialValues: { firstName: '', lastName: '', email: '' },
     onSubmit: (values) => {
       console.log(values)
@@ -47,17 +47,34 @@ export const FormikBasePage = () => {
 
       <form noValidate onSubmit={ handleSubmit }>
         <label htmlFor="firstName">First Name</label>
-        <input type="text" name="firstName" onChange={ handleChange } value={ values.firstName } />
-        <span>First Name is Required</span>
+        <input 
+          type="text" 
+          name="firstName" 
+          value={ values.firstName } 
+          onChange={ handleChange }
+          onBlur={ handleBlur } 
+        />
+        { touched.firstName && errors.firstName && <span>{ errors.firstName }</span> }
         
         <label htmlFor="lastName">Last Name</label>
-        <input type="text" name="lastName" onChange={ handleChange } value={ values.lastName } />
-        <span>Last Name is Required</span>
+        <input 
+          type="text" 
+          name="lastName" 
+          value={ values.lastName } 
+          onChange={ handleChange }
+          onBlur={ handleBlur } 
+        />
+        { touched.lastName && errors.lastName && <span>{ errors.lastName }</span> }
 
         <label htmlFor="email">Email Adress</label>
-        <input type="email" name="email" onChange={ handleChange } value={ values.email } />
-        <span>Email is Required</span>
-        <span>Check for an valid email</span>
+        <input 
+          type="email" 
+          name="email" 
+          value={ values.email } 
+          onChange={ handleChange }
+          onBlur={ handleBlur } 
+        />
+        { touched.email && errors.email && <span>{ errors.email }</span> }
 
         <button type='submit'>Submit</button>
       </form>
